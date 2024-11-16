@@ -1,0 +1,150 @@
+
+<div class="bg">
+<div class="toolbar" role="banner">
+  <img src="../assets/logo.jpg" alt="vms" style="width: 4em;">
+  <div class="spacer"></div>
+  <i class="pi pi-bell text-3xl mr-1" pBadge value="2"></i>
+  <i class="pi pi-globe mr-1"></i>
+
+  <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/xuxuefeng.png" styleClass="mr-2"
+    size="large"></p-avatar>
+</div>
+
+<div class="content">
+  <h2>Search</h2>
+  <div class="col-sm-12">
+    <span class="p-input-icon-left">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText [(ngModel)]="searchValue" placeholder="Search" />
+    </span>
+  </div>
+
+  <div class="col-sm-12 mt-3 df">
+    <h6><span class="fw-bolder me-3">Applied Filters:</span> </h6>
+    <p-chip label="e-Voucher" [removable]="true"></p-chip>
+    <p-chip label="Clear Filters" [removable]="true"></p-chip>
+  </div>
+
+  <div class="col-sm-12 mt-4">
+    <div class="row">
+      <div class="col-sm-3">
+        <p-card header="Categories" [style]="{ width: '360px' }">
+          <!-- <div class="card flex justify-content-center"> -->
+          <p-accordion [multiple]="true" [activeIndex]="[0]">
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                  <span class="vertical-align-middle me-5 pe-5">e-Voucher</span>
+                  <i class="pi pi-verified ms-5" style="color: red;"></i>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+
+              </ng-template>
+            </p-accordionTab>
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                  <span class="vertical-align-middle me-5 pe-5"> Products </span>
+                  <i class="pi pi-verified ms-5 ps-2"></i>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+
+              </ng-template>
+            </p-accordionTab>
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                  <span class="vertical-align-middle me-5 pe-5">Evergreen</span>
+                  <i class="pi pi-verified ms-5 ps-1"></i>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+
+              </ng-template>
+            </p-accordionTab>
+            <p-accordionTab>
+              <ng-template pTemplate="header">
+                <div class="flex align-items-center">
+                  <span class="vertical-align-middle me-5">Fashion & Retail</span>
+                  <i class="pi pi-verified ms-5 ps-1"></i>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+
+              </ng-template>
+            </p-accordionTab>
+          </p-accordion>
+          <!-- </div> -->
+        </p-card>
+      </div>
+      <div class="col-sm-9">
+        <div class="df mb-2" style="justify-content: space-between;">
+          <h3 class="fw-bolder ms-3">{{productLists.length }} results found</h3>
+          <p-sidebar [(visible)]="sidebarVisible2" position="right">
+            <div class="df" style="justify-content: space-between;">
+              <h6>Filter By</h6>
+              <h6 class="fs-6 text-danger">Reset All</h6>
+            </div>
+            <p-divider></p-divider>
+            <div class="df">
+              <h6>Sort</h6>
+            </div>
+            <div class="df">
+              <p-chip label=" A to Z " class="me-2" [style]="{'background-color': 'red', 'color': '#ffffff'}"></p-chip>
+              <p-chip label="Z to A"></p-chip>
+            </div>
+            <ng-template pTemplate="footer">
+              <p-button label="Apply" styleClass="p-button-danger"></p-button>
+            </ng-template>
+          </p-sidebar>
+          <p-button type="button" class="mr-2" (click)="sidebarVisible2 = true" label="Sort"></p-button>
+        </div>
+        <!-- <div class="df"> -->
+        <div class="col-sm-12" style="display: inline-flex; flex-wrap: wrap;">
+          <div class="col-sm-4 ms-4 me-4 mb-3" *ngFor="let list of productLists">
+            <p-card [style]="{ width: '360px' }">
+              <ng-template pTemplate="header">
+                <img alt="Card" src="{{list.display_img_url}}" width="100%" height="300px"/>
+                  <p-chip label="On High Demand" class="ml-2" *ngIf="list.low_stock"></p-chip>
+                  <p-chip label="(Out Of Stock)" class="ml-2" *ngIf="list.out_of_stock"></p-chip>
+              </ng-template>
+              <h6 class="fw-bolder text-center">{{list.name}}</h6>
+              <p class="text-center pt-2">{{list.points}} points</p>
+              <p-divider></p-divider>
+              <p class="text-center">Valid Until: {{list.valid_until | date: 'dd/MM/yyyy'}}</p>
+            </p-card>
+          </div>
+
+        </div>
+
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+  <p-divider></p-divider>
+  <div class="col-sm-12 row">
+    <div class="col-sm-4">
+      <img src="../assets/logo.jpg" alt="vms" style="width: 6em;" />
+      <p class="text-muted fw-normal">&copy; 2024</p>
+    </div>
+    <div class="col-sm-4">
+      <h5>Version</h5>
+      <p class="text-muted fw-normal">1.0.0</p>
+    </div>
+    <div class="col-sm-4">
+      <h5>About</h5>
+      <p class="text-muted fw-normal">Contact Us</p>
+      <p class="text-muted fw-normal"> Privacy</p>
+      <p class="text-muted fw-normal">Terms of Use</p>
+    </div>
+  </div>
+
+
+</div>
+</div>
+
+
+<router-outlet></router-outlet>
